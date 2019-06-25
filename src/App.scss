@@ -1,0 +1,18 @@
+@import './Components/Calculator/Calculator.scss';
+
+// Variables
+$background-one: white;
+$background-two : rgb(125, 125, 125);
+$background-three: rgb(25, 25, 25);
+
+html {
+  width: 100vw;
+  height: 100vh;
+  background: $background-three;
+        
+    .App {
+          text-align: center;
+        }
+}
+
+

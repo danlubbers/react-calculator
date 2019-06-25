@@ -1,0 +1,92 @@
+    body {
+        width: 100vw;
+        height: 70vh;
+        // background: yellow;
+
+        table {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            tr {
+                width: 350px;
+                height: 100px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                // background: yellow;
+                
+                td{
+                    margin: 10px 5px 10px 5px;
+                    width: 100px;
+                    height: 75px;
+                    border-radius: 50px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background: green;
+                    font-size: 1.8em;
+                    font-family: Helvetica;
+                    color: rgb(200, 200, 200);
+                    background: rgb(50, 50, 50);
+                }
+                td:active {
+                    background: rgb(75, 75, 75);;
+                }
+
+            }
+
+                .row-one {
+
+                    .data-output {
+                        padding-right: 10px;
+                        width: 100vw;
+                        border-radius: 10px;
+                        display: flex;
+                        justify-content: flex-end;
+                        font-size: 2.8em;
+                    }
+                }
+
+                .data-one {
+                    background: rgb(125, 125, 125);
+                }
+
+                .data-one:active {
+                    background: rgb(150, 150, 150);
+                }
+
+                .operator{
+                    background: rgb(214, 113, 45);
+                }
+
+                .operator:active {
+                    background: rgb(239, 138, 70);
+                }
+
+                #equals {
+                    background: rgb(214, 113, 45);
+                }
+
+                #equals:active {
+                    background: rgb(239, 138, 70);
+                }
+
+                .row-six {
+
+                    #zero {
+                        width: 225px;
+                    }
+                }
+        }
+
+        h1 {
+            margin: 20px 0px 0px 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgb(100, 100, 100);
+            font-size: 2em;
+        }
+    }
