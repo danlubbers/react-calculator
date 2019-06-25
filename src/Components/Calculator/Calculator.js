@@ -5,20 +5,26 @@ export default class Calculator extends Component {
         super(props) 
 
         this.state = {
+            // This shows what we see on screen in the Display
             onDisplay: '0',
+            // This sets the first number before hitting an operator
             firstNum: '0',
+            // This sets the operator 
             operator: '',
         }
 
-        this.clickAC = this.clickAC.bind(this);
-        this.numbers = this.numbers.bind(this);
-        this.decimal = this.decimal.bind(this);
-        this.operator = this.operator.bind(this);
-        this.equals = this.equals.bind(this);
+        // Binding commented out due to ES6 arrow functions
+        // this.clickAC = this.clickAC.bind(this);
+        // this.numbers = this.numbers.bind(this);
+        // this.decimal = this.decimal.bind(this);
+        // this.operator = this.operator.bind(this);
+        // this.equals = this.equals.bind(this);
 
     }
 
-    clickAC(e) {
+    // Clear state
+    // Also using ES6 arrow functions so we don't have to manually bind above
+    clickAC = (e) => {
         // console.log(e.target.textContent)
         this.setState({
             onDisplay: '0',
@@ -29,7 +35,7 @@ export default class Calculator extends Component {
     }
 
     // Number Keys
-    numbers(e) {
+    numbers = (e) => {
         let key = e.target;
         let action = key.dataset.action;
         let keyContent = key.textContent;
@@ -38,9 +44,11 @@ export default class Calculator extends Component {
             // console.log(keyContent)
             // console.log('before setState; ', this.state.onDisplay)
             if(this.state.onDisplay === '0') {
+                // If 0 is showing in the display, this will change state to the current keyContent that was clicked
                 this.setState({onDisplay: keyContent})
                 // console.log('after setState: ', this.state.onDisplay)
                 } else {
+                    // If 0 is not showing in the display, the keyContent will be appended to the number that is onDisplay
                     this.setState({onDisplay: this.state.onDisplay + keyContent});
                 }
             }
@@ -48,7 +56,7 @@ export default class Calculator extends Component {
 
     // Decimal Key
 
-    decimal(e) {
+    decimal = (e) => {
         let key = e.target;
         let action = key.dataset.action;
         let keyContent = key.textContent;
@@ -61,15 +69,18 @@ export default class Calculator extends Component {
 
     // Operand Keys
 
-    operator(e) {
+    operator = (e) => {
         let key = e.target;
         let action = key.dataset.action;
         let keyContent = key.textContent;
             
         if(action === 'operator') {
             this.setState({
+                // Once an operator is clicked, it will set what is onDisplay to the firstNum variable in state.
                 firstNum: this.state.onDisplay,
+                // This clears the display between the first number and second number being chosen
                 onDisplay: '',
+                // This will set the operator variable to the correct operator based on which button was clicked.
                 operator: keyContent
             });
             // console.log('onDisplay: ', this.state.onDisplay);
@@ -79,10 +90,11 @@ export default class Calculator extends Component {
     }
 
     // Calculations
-    equals(e) {
+    equals = (e) => {
         if(this.state.operator === '+') {
+            let addition = +this.state.firstNum + +this.state.onDisplay;
             this.setState({
-                onDisplay: +this.state.firstNum + +this.state.onDisplay,
+                onDisplay: addition,
                 firstNum: '',
                 operator: ''
             });
@@ -91,30 +103,43 @@ export default class Calculator extends Component {
         }
 
         if(this.state.operator === '-') {
+            let subtraction = +this.state.firstNum - +this.state.onDisplay;
             this.setState({
-                onDisplay: +this.state.firstNum - +this.state.onDisplay,
+                onDisplay: subtraction,
                 firstNum: '',
                 operator: ''
             });
         }
 
         if(this.state.operator === 'x') {
+            let multiplication = +this.state.firstNum * +this.state.onDisplay;
             this.setState({
-                onDisplay: +this.state.firstNum * +this.state.onDisplay,
+                onDisplay: multiplication,
                 firstNum: '',
                 operator: ''
             }); 
         }
 
         if(this.state.operator === '÷') {
+            let division = +this.state.firstNum / +this.state.onDisplay;
             this.setState({
-                onDisplay: +this.state.firstNum / +this.state.onDisplay,
+                onDisplay: division,
                 firstNum: '',
                 operator: ''
             });
         }
     }
 
+     // Extras 
+     plusMinus = () => {
+        // This tests to makes sure there won't be more than one - symbol on the display
+        if(/\-/g.test(this.state.onDisplay)) {
+            // Math.abs turns the negative integer back into a positive one
+            this.setState({onDisplay: Math.abs(this.state.onDisplay)});
+        } else {
+            this.setState({onDisplay: '-' + this.state.onDisplay});
+        }
+    }
 
     render() {
 
@@ -133,7 +158,7 @@ export default class Calculator extends Component {
                     <tbody>
                         <tr className="row-two">
                             <td onClick={this.clickAC} className="data-one" data-action="clear" id="ac">AC</td>
-                            <td className="data-one" id="plus-minus">+/-</td>
+                            <td onClick={this.plusMinus} className="data-one" id="plus-minus">+/-</td>
                             <td className="data-one" id="percent">%</td>
                             <td onClick={this.operator} className="data-one operator" data-action="operator" id="divide">÷</td>
                         </tr>
